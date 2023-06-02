@@ -1,2 +1,17 @@
 yarn add express mongoose
 dont use co
+
+
+//https://mongoosejs.com/docs/typescript/statics-and-methods.html
+jodi statics use kora hoi then ai patern a userModel and User likta hba 
+
+ 
+
+type UserModel = Model<IUser, {}, IUserMethods>;
+const User = model<IUser, UserModel>('User', schema);
+
+
+set-up eslint prettier husky 
+//https://blog.logrocket.com/linting-typescript-eslint-prettier/ 
+
+
