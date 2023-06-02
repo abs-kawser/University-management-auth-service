@@ -1,4 +1,4 @@
-yarn add express mongoose
+  yarn add express mongoose
 dont use co
 
 
@@ -15,3 +15,4 @@ set-up eslint prettier husky
 //https://blog.logrocket.com/linting-typescript-eslint-prettier/ 
 
 
+//um 9 checking is work or not 
