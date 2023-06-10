@@ -1,8 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import express, { Application, Request, Response } from 'express'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import express, { Application } from 'express'
 import cors from 'cors'
 import usersService from './app/modules/users/users.service'
 import UserRouter from './app/modules/users/users.route'
+import globalErrorHandler from './app/modules/users/middlewares/globalErrorHandler'
 
 const app: Application = express()
 
@@ -16,7 +17,7 @@ app.get('/', async (req, res) => {
   await usersService.createUser({
     id: '238925',
     password: '12345',
-    role: 'student',
+    role: 'student 1',
   })
 
   res.send('Hello   World!')
@@ -25,4 +26,7 @@ app.get('/', async (req, res) => {
 //Applicaton Route
 app.use('/api/v1/users/', UserRouter)
 
+//global err handlers
+
+app.use(globalErrorHandler)
 export default app

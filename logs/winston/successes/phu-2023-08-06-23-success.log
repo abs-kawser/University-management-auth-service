@@ -1,0 +1,10 @@
+Thu Jun 08 2023 23:46:29 46  [PH] info: Database connection established
+Thu Jun 08 2023 23:46:29 46  [PH] info: Example app listening on port 5000
+Thu Jun 08 2023 23:47:42 47  [PH] info: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+Thu Jun 08 2023 23:49:6 49  [PH] info: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+undefined
+{ level: 'info', label: 'PH', timestamp: '2023-06-08T17:52:42.780Z' }
+{ level: 'info', label: 'PH', timestamp: '2023-06-08T17:53:21.422Z' }
+{ level: 'info', label: 'PH', timestamp: '2023-06-08T17:55:42.748Z' }
+{ level: 'info', label: 'PH', timestamp: '2023-06-08T17:55:44.049Z' }
+{ level: 'info', label: 'PH', timestamp: '2023-06-08T17:56:22.046Z' }
