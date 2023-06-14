@@ -1,24 +1,23 @@
-import { NextFunction, Request, Response } from 'express'
+import { ErrorRequestHandler } from 'express'
 import { IGenericErrorMessage } from '../../../../interfaces/error'
 import handleValidationError from '../../../../errors/handleValidationError'
 import config from '../../../../config'
-import { error } from 'winston'
 import ApiError from '../../../../errors/ApiError'
+import { errorlogger } from '../../../../shared/logger'
 
-const globalErrorHandler = (
-  err,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  res.status(400).json({ abs: err })
+const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
+  //res.status(400).json({ abs: error } )
+
+  config.env === 'devlopment'
+    ? console.log(`globalErrorHandler ~ `, error) //devlopment purpass
+    : errorlogger.error(`globalErrorHandler ~ `, error) //Production  debuging purpass
 
   let statusCode = 500
   let message = 'Something went wrong !'
   let errorMessages: IGenericErrorMessage[] = []
 
-  if (err?.name === 'ValidationError') {
-    const simplifiedError = handleValidationError(err)
+  if (error?.name === 'ValidationError') {
+    const simplifiedError = handleValidationError(error)
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessages = simplifiedError.errorMessages
@@ -49,7 +48,7 @@ const globalErrorHandler = (
     success: false,
     message,
     errorMessages,
-    stack: config.env !== 'production' ? err?.stack : undefined,
+    stack: config.env !== 'production' ? error?.stack : undefined,
   })
 
   next()
