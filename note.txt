@@ -22,3 +22,13 @@ set-up eslint prettier husky
 
 
 https://www.npmjs.com/package/winston
+
+
+
+
+//Module 13 :
+13.5:  zod validation file staructure plb 
+
+13:11
+same yaer same semester er validition kora hoissa pre hook er madhoma 
+Model er vitor ja nam gula ' ' er vitor dawya hoitasa oigula databsae a collection a save hoitasa 

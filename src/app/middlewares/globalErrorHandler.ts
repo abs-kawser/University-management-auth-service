@@ -1,9 +1,11 @@
 import { ErrorRequestHandler } from 'express'
-import { IGenericErrorMessage } from '../../../../interfaces/error'
-import handleValidationError from '../../../../errors/handleValidationError'
-import config from '../../../../config'
-import ApiError from '../../../../errors/ApiError'
-import { errorlogger } from '../../../../shared/logger'
+import { IGenericErrorMessage } from '../../interfaces/error'
+import handleValidationError from '../../errors/handleValidationError'
+import config from '../../config'
+import ApiError from '../../errors/ApiError'
+import { errorlogger } from '../../shared/logger'
+import { ZodError } from 'zod'
+import handleZodError from '../../errors/handleZodError'
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   //res.status(400).json({ abs: error } )
@@ -18,6 +20,11 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
 
   if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error)
+    statusCode = simplifiedError.statusCode
+    message = simplifiedError.message
+    errorMessages = simplifiedError.errorMessages
+  } else if (error instanceof ZodError) {
+    const simplifiedError = handleZodError(error)
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessages = simplifiedError.errorMessages

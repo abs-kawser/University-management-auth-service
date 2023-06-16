@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express, { Application } from 'express'
 import cors from 'cors'
-import { UserRoutes } from './app/modules/users/user.route'
-import globalErrorHandler from './app/modules/users/middlewares/globalErrorHandler'
-import { UserService } from './app/modules/users/user.service'
+import { UserRoutes } from './app/modules/user/user.route'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
+import { UserService } from './app/modules/user/user.service'
 import ApiError from './errors/ApiError'
+import { AcademicSemesterRoutes } from './app/modules/academicSemester/academicSemester.route'
 
 const app: Application = express()
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }))
 //Applicaton Route
 
 app.use('/api/v1/users/', UserRoutes)
+app.use('/api/v1/academic-semester', AcademicSemesterRoutes)
 //Testing
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
   throw new Error('Testing error logger')
