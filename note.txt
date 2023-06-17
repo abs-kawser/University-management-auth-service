@@ -32,3 +32,7 @@ https://www.npmjs.com/package/winston
 13:11
 same yaer same semester er validition kora hoissa pre hook er madhoma 
 Model er vitor ja nam gula ' ' er vitor dawya hoitasa oigula databsae a collection a save hoitasa 
+
+13:13-- Routeing er opor mapping kora hoissa 
+
+13:14 && 13:14 --> sparate response ,crate a create Async handler  for try catch and use them controllers and also sparate route 

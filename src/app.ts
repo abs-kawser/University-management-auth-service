@@ -6,6 +6,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler'
 import { UserService } from './app/modules/user/user.service'
 import ApiError from './errors/ApiError'
 import { AcademicSemesterRoutes } from './app/modules/academicSemester/academicSemester.route'
+import routes from './app/routes'
 
 const app: Application = express()
 
@@ -27,8 +28,11 @@ app.use(express.urlencoded({ extended: true }))
 
 //Applicaton Route
 
-app.use('/api/v1/users/', UserRoutes)
-app.use('/api/v1/academic-semester', AcademicSemesterRoutes)
+// app.use('/api/v1/users/', UserRoutes)
+// app.use('/api/v1/academic-semester', AcademicSemesterRoutes)
+
+app.use('/api/v1', routes)
+
 //Testing
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
   throw new Error('Testing error logger')
