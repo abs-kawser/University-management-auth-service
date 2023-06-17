@@ -10,26 +10,26 @@ const createUser = catchAsync(
 
     const result = await UserService.createUser(user)
 
-    next()
-
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'user create SuccessFully',
       data: result,
     })
-
-    // res.status(200).json({
-    //   success: true,
-    //   message: 'hit successfully',
-    //   data: result,
-    // })
+    next()
   }
 )
 
 export const Usercontroller = {
   createUser,
 }
+
+//manualy send response
+// res.status(200).json({
+//   success: true,
+//   message: 'hit successfully',
+//   data: result,
+// })
 
 // res.status(404).json({
 //   success: false,
