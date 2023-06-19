@@ -27,7 +27,7 @@ https://www.npmjs.com/package/winston
 
 
 //Module 13 :
-13.5:  zod validation file staructure plb 
+13.5:  zod validation file staructure plb  validate request 
 
 13:11
 same yaer same semester er validition kora hoissa pre hook er madhoma 
@@ -36,6 +36,13 @@ Model er vitor ja nam gula ' ' er vitor dawya hoitasa oigula databsae a collecti
 13:13-- Routeing er opor mapping kora hoissa 
 
 13:14 && 13:14 --> sparate response ,crate a create Async handler  for try catch and use them controllers and also sparate route 
+
+
+
+
+
+
+
 
 Module 14 start ----------
 
@@ -53,3 +60,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   });
   next();
 });
+
+
+
+14:2--> pagination er jonno 4 jinish laga |page,Limit ,sortby,sortorder| 
+getallsemester nama function create kora hoilo 

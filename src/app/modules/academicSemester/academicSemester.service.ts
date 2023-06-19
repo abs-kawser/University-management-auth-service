@@ -1,4 +1,5 @@
 import ApiError from '../../../errors/ApiError'
+//import { IpagenationOptions } from '../../../interfaces/pagenationOption'
 import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
 import { IAcademicSemester } from './academicSemester.interface'
 import { AcademicSemester } from './academicSemester.model'
@@ -16,6 +17,11 @@ const createSemester = async (
   return result
 }
 
+// const getAllSemesters = (pagenationOptions:IpagenationOptions) => {
+
+// }
+
 export const AcademicSemesterService = {
   createSemester,
+  // getAllSemesters
 }

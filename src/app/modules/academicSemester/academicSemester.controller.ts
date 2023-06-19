@@ -28,6 +28,31 @@ const createSemester = catchAsync(
   }
 )
 
+// const getAllSemesters = catchAsync(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     //pagenation
+
+//     const pagenationOptions = {
+//       page: Number(req.query.page),
+//       limit: Number(req.query.limit),
+//       sortBy: req.query.sortBy,
+//       sortOeder: req.query.sortOeder,
+//     }
+
+//     const result = await AcademicSemesterService.getAllSemesters(
+//       pagenationOptions
+//     )
+//     sendResponse(res, {
+//       statusCode: httpStatus.OK,
+//       success: true,
+//       message: `Semester all  successfully`,
+//       data: result,
+//     })
+//     next()
+//   }
+// )
+
 export const AcademicSemesterController = {
   createSemester,
+  //getAllSemesters,
 }
