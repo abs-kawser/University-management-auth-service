@@ -1,5 +1,6 @@
 import ApiError from '../../../errors/ApiError'
-//import { IpagenationOptions } from '../../../interfaces/pagenationOption'
+import { IGenricResponse } from '../../../interfaces/common'
+import { IpagenationOptions } from '../../../interfaces/pagenationOption'
 import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
 import { IAcademicSemester } from './academicSemester.interface'
 import { AcademicSemester } from './academicSemester.model'
@@ -17,11 +18,29 @@ const createSemester = async (
   return result
 }
 
-// const getAllSemesters = (pagenationOptions:IpagenationOptions) => {
+const getAllSemesters = async (
+  pagenationOptions: IpagenationOptions
+): Promise<IGenricResponse<IAcademicSemester[]>> => {
+  const { page = 1, limit = 10 } = pagenationOptions
+  const skip = (page - 1) * limit
 
-// }
+  const result = await await AcademicSemester.find()
+    .sort()
+    .skip(skip)
+    .limit(limit)
+
+  const total = await AcademicSemester.countDocuments()
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
+}
 
 export const AcademicSemesterService = {
   createSemester,
-  // getAllSemesters
+  getAllSemesters,
 }
