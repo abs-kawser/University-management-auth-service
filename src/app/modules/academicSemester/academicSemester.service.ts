@@ -30,7 +30,7 @@ const getAllSemesters = async (
   //const { page = 1, limit = 10 } = pagenationOptions
 
   //implemet searching options to useing and condition matching
-  const { searchTerm } = filters
+  const { searchTerm, ...filtersData } = filters
 
   const academicSemesterSearchableFields = ['title', 'code', 'year']
 
@@ -47,33 +47,13 @@ const getAllSemesters = async (
     })
   }
 
-  // const andConditions = [
-  //   {
-  //     $or: [
-  //       {
-  //         title: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-
-  //       },
-
-  //       {
-  //         code: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //          }
-  //       },
-  //       {
-  //         year: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //          }
-  //       },
-
-  //     ],
-  //   },
-  // ]
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
 
   const { page, limit, skip, sortBy, sortOrder } =
     pagenationHelpers.calculatePagination(pagenationOptions)
@@ -106,3 +86,31 @@ export const AcademicSemesterService = {
 }
 
 //sortby=code&sortOrder=desc
+
+// const andConditions = [
+//   {
+//     $or: [
+//       {
+//         title: {
+//           $regex: searchTerm,
+//           $options: 'i',
+//         },
+
+//       },
+
+//       {
+//         code: {
+//           $regex: searchTerm,
+//           $options: 'i',
+//          }
+//       },
+//       {
+//         year: {
+//           $regex: searchTerm,
+//           $options: 'i',
+//          }
+//       },
+
+//     ],
+//   },
+// ]

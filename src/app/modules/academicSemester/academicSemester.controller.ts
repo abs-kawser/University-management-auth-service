@@ -42,8 +42,10 @@ const getAllSemesters = catchAsync(
     //   sortOeder: req.query.sortOeder,
     // }
 
-    const filters = pick(req.query, ['searchTerm'])
+    const filters = pick(req.query, ['searchTerm', 'title', 'code', 'year'])
     const pagenationOptions = pick(req.query, pagenationFields)
+
+    console.log(filters)
 
     console.log(pagenationOptions)
 

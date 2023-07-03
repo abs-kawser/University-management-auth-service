@@ -89,3 +89,15 @@ getallsemester nama function create kora hoilo
       })),
     })
   }
+
+
+  14:8 Implement Dynamic Filtering -->   
+  if (Object.keys(filtersData).length ) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  
