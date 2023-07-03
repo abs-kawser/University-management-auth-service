@@ -42,11 +42,13 @@ const getAllSemesters = catchAsync(
     //   sortOeder: req.query.sortOeder,
     // }
 
+    const filters = pick(req.query, ['searchTerm'])
     const pagenationOptions = pick(req.query, pagenationFields)
 
     console.log(pagenationOptions)
 
     const result = await AcademicSemesterService.getAllSemesters(
+      filters,
       pagenationOptions
     )
     sendResponse<IAcademicSemester[]>(res, {

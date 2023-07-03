@@ -68,3 +68,24 @@ getallsemester nama function create kora hoilo
 
 
 14:3--> pick .ts nama akta akta file a function er moddha loop use kora hoissa jata kora object and keys throw kora [hasOwnProperty] nama akta method use kora hoissa jata kora obj,key retrun kora 
+
+
+14:6 start searching 
+
+14:7 Implement Dynamic Searching --> const { searchTerm } = filters
+
+  const academicSemesterSearchableFields = ['title', 'code', 'year']
+
+  const andConditions = []
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: academicSemesterSearchableFields.map( (field) => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+           }
+         
+      })),
+    })
+  }

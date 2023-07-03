@@ -1,10 +1,15 @@
 import ApiError from '../../../errors/ApiError'
+import { pagenationHelpers } from '../../../helpers/pagenationHelper'
 import { IGenricResponse } from '../../../interfaces/common'
 import { IpagenationOptions } from '../../../interfaces/pagenationOption'
 import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
-import { IAcademicSemester } from './academicSemester.interface'
+import {
+  IAcademicSemester,
+  IAcademicSemesterFilters,
+} from './academicSemester.interface'
 import { AcademicSemester } from './academicSemester.model'
 import status = require('http-status')
+import { SortOrder } from 'mongoose'
 
 const createSemester = async (
   payload: IAcademicSemester
@@ -19,13 +24,68 @@ const createSemester = async (
 }
 
 const getAllSemesters = async (
+  filters: IAcademicSemesterFilters,
   pagenationOptions: IpagenationOptions
 ): Promise<IGenricResponse<IAcademicSemester[]>> => {
-  const { page = 1, limit = 10 } = pagenationOptions
-  const skip = (page - 1) * limit
+  //const { page = 1, limit = 10 } = pagenationOptions
 
-  const result = await await AcademicSemester.find()
-    .sort()
+  //implemet searching options to useing and condition matching
+  const { searchTerm } = filters
+
+  const academicSemesterSearchableFields = ['title', 'code', 'year']
+
+  const andConditions = []
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: academicSemesterSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    })
+  }
+
+  // const andConditions = [
+  //   {
+  //     $or: [
+  //       {
+  //         title: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //         },
+
+  //       },
+
+  //       {
+  //         code: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //          }
+  //       },
+  //       {
+  //         year: {
+  //           $regex: searchTerm,
+  //           $options: 'i',
+  //          }
+  //       },
+
+  //     ],
+  //   },
+  // ]
+
+  const { page, limit, skip, sortBy, sortOrder } =
+    pagenationHelpers.calculatePagination(pagenationOptions)
+
+  const sortCondition: { [key: string]: SortOrder } = {}
+
+  if (sortBy && sortOrder) {
+    sortCondition[sortBy] = sortOrder
+  }
+
+  const result = await AcademicSemester.find({ $and: andConditions })
+    .sort(sortCondition)
     .skip(skip)
     .limit(limit)
 
@@ -44,3 +104,5 @@ export const AcademicSemesterService = {
   createSemester,
   getAllSemesters,
 }
+
+//sortby=code&sortOrder=desc
